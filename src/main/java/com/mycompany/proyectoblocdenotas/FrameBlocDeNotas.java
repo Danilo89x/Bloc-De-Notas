@@ -8,6 +8,7 @@ package com.mycompany.proyectoblocdenotas;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.io.File;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -16,15 +17,37 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Danilo
  */
 public class FrameBlocDeNotas extends javax.swing.JFrame {
-    
+    private String filePath = null;
+    private boolean isContentModified = false;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameBlocDeNotas.class.getName());
 
     /**
      * Creates new form FrameBlocDeNotas
      */
+    public String extraerNombreArchivo(String filePath){
+        if (filePath == null || filePath.trim().isEmpty()) {
+            return null;
+        }
+            File archivo = new File(filePath);
+        return archivo.getName();
+    }
+    
+    
+    public void actualizarTitulo(){
+        String titulo = "";
+        if (filePath == null || filePath.isEmpty()) {
+            titulo= "Sin titulo: Bloc de notas";
+        }else{
+           String fileName = extraerNombreArchivo(filePath);
+           titulo = fileName + ": Bloc de notas";
+        }
+        this.setTitle(titulo);
+    }
+    
     public FrameBlocDeNotas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        actualizarTitulo();
     }
 
     /**
@@ -70,6 +93,11 @@ public class FrameBlocDeNotas extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("Nuevo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Nueva Ventana");
@@ -125,6 +153,10 @@ public class FrameBlocDeNotas extends javax.swing.JFrame {
         // TODO add your handling code here:
         cambiarTema(new FlatDarkLaf());
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
