@@ -5,7 +5,11 @@
 package com.mycompany.proyectoblocdenotas;
 
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -83,6 +87,11 @@ public class FrameBlocDeNotas extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("Tema Oscuro");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -112,6 +121,11 @@ public class FrameBlocDeNotas extends javax.swing.JFrame {
         nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        cambiarTema(new FlatDarkLaf());
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -135,4 +149,13 @@ public class FrameBlocDeNotas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    private void cambiarTema(FlatDarkLaf flatDarkLaf) {
+        try {
+            UIManager.setLookAndFeel(flatDarkLaf);
+            flatDarkLaf.updateUI();
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.getLogger(FrameBlocDeNotas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
 }
